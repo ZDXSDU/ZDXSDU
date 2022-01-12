@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校验码</title>
+    <style>
+        .main {
+            width: 500px;
+            margin: 150px auto;
+        }
+        
+        .inputstr {
+            display: inline-block;
+            width: 380px;
+            height: 42px;
+            font-size: 18px;
+            outline: none;
+            border: 1px solid #5e5e5e;
+            color: #000;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        .enter,
+        .clean {
+            display: inline-block;
+            border: 1px solid #333;
+            cursor: pointer;
+            width: 50px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            border-radius: 5px;
+            background-color: #ddd;
+        }
+        
+        .result {
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 30px;
+            color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h4 style="text-align: center;margin-bottom: 65px;">身份证校验码比对</h4>
+        <input class="inputstr" type="text" placeholder="请输入要查询的身份证号码并点击校验按钮">
+        <a href="javascript:;" class="enter">校验</a>
+        <a class="clean" href="javascript:;">清空</a>
+        <p class="result"></p>
+    </div>
+    <script>
+        var cleanbtn = document.querySelector('.clean'); // 清空按钮
+        var enter = document.querySelector('.enter'); // 检索按钮
+        var result = document.querySelector('.result'); // 接受返回值
+        cleanbtn.addEventListener('click', function() {
+            window.location.reload(true); // 页面强制刷新
+        });
+        enter.addEventListener('click', function() {
+            var inputstr = document.querySelector('.inputstr').value; //用户输入的字符            
+            console.log(inputstr); // 用于测试时的日志打印
+            if (inputstr.length == 18) {
+                result.innerHTML = '';
+                cutstr(inputstr); // 调用函数查询已输入的字段               
+            } else {
+                result.innerHTML = '请输入正确的十八位身份证号；身份证号中的X请用英文大写X表示';
+            }
+        });
+
+        function cutstr(n) { // 主函数；
+            var coefficient = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]; // 前十七位的系数   
+            var last_num = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2]; // 对应第十八位           
+            var tempresult = 0; // 存储前十七位乘积的和的11余数
+            for (i = 0; i < 17; i++) {
+                tempresult = tempresult + n[i] * coefficient[i]; // 将前十七位的乘积相加
+            }
+            var templast = (tempresult % 11); // 返回值；11的余数    
+            var inputlast = n.substr(-1); // 返回用户输入的第十八位数   
+            if (inputlast == last_num[templast]) { // 判断用户输入的尾号是否与计算的结果一致        
+                alert('校验码正确');
+            } else {
+                alert('校验码不正确!请检查输入是否正确!');
+            }
+        }
+    </script>
+</body>
+
+</html>
