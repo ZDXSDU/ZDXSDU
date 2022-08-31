@@ -1,7 +1,6 @@
 ### Yoo, I'm ZDX 👋
 - 🍻 [SDU](https://www.sdu.edu.cn/), _BSc in Computer Science_
-- ⚡ JavaScript.
-- 🔭 A web front-end developer.
+- ⚡ JavaScript .NET T-SQL.
 - 🌱 Welcome to my personal website [XXLW](https://xxlw.xyz), a website navigation with a to-do list.
 - 💬 You can contact me by [email](dx2398463125@foxmail.com).
 <!-- - 📫 
